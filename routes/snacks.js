@@ -37,10 +37,15 @@ router.post('/', (req, res, next) => {
     my_rating: req.body.myrating
   }
 
-  db('snacks').insert(snack, '*').then((newSnack) => {
-    var id = newSnack[0].id;
-    res.redirect(`/snacks/${id}`)
-  })
+  if (!snack.name) {
+    res.render('snacks/new', { error: 'Name can NOT be blank.', snack })
+  } else {
+    db('snacks').insert(snack, '*').then((newSnack) => {
+      var id = newSnack[0].id;
+      res.redirect(`/snacks/${id}`)
+    })
+  }
+
 })
 
 router.put('/:id', (req, res, next) => {
