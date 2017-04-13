@@ -1,0 +1,31 @@
+<div class="container">
+  <h1>Snacks Main Page</h1>
+  <a href="/snacks/new">Create a New Snack</a>
+  <hr>
+  {{#each snacks}}
+  <div class="row">
+    <div class="col-md-2">
+      <img src="{{ this.image_url }}"
+        alt="{{ this.name }}"
+        class="poster">
+    </div>
+    <div class="col-md-6">
+      <h2>
+        <a href="/snacks/{{ this.id }}">{{ this.name }}</a>
+      </h2>
+      <p>My Rating: {{ this.my_rating }}</p>
+      <p>Description: {{ this.review_description }}</p>
+      <p>
+        <form action="/snacks/{{ this.id }}?_method=DELETE" method="post">
+          <input
+            class="btn btn-sm btn-danger"
+            type="submit"
+            name="delete"
+            value="Delete Snack">
+        </form>
+        <a href="/snacks/{{ this.id }}/edit" type="button" name="button" class="btn btn-success">Edit</a>
+      </p>
+    </div>
+  </div>
+  {{/each}}
+</div>
